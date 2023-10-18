@@ -63,7 +63,7 @@ class _PokemonGenerationsPageState extends State<PokemonGenerationsPage> {
           return Padding(
             padding: EdgeInsets.all(16.0),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.grey[300]),
+              style: ElevatedButton.styleFrom(primary: Colors.green[300]),
               onPressed: () {},
               child: Text(generations[index].toUpperCase()),
             ),
