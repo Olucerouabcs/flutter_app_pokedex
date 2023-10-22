@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'listagen.dart';
+import 'listaPoke.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,7 +55,14 @@ class _PokemonGenerationsPageState extends State<PokemonGenerationsPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListaPoke(),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -63,8 +72,66 @@ class _PokemonGenerationsPageState extends State<PokemonGenerationsPage> {
           return Padding(
             padding: EdgeInsets.all(16.0),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.green[300]),
-              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red[300],
+                minimumSize:
+                    Size(200, 60), // Establece el tamaño mínimo del botón
+                padding: EdgeInsets.all(20), // Establece el relleno del botón
+                textStyle:
+                    TextStyle(fontSize: 20), // Establece el tamaño del texto
+              ),
+              onPressed: () {
+                int numGen = 1;
+                String nombreGen = "Kanto";
+                switch (generations[index]) {
+                  case "generation-i":
+                    numGen = 1;
+                    nombreGen = "Kanto";
+                    break;
+                  case "generation-ii":
+                    numGen = 2;
+                    nombreGen = "Johto";
+                    break;
+                  case "generation-iii":
+                    numGen = 3;
+                    nombreGen = "Hoenn";
+                    break;
+                  case "generation-iv":
+                    numGen = 4;
+                    nombreGen = "Sinnoh";
+                    break;
+                  case "generation-v":
+                    numGen = 5;
+                    nombreGen = "Unova";
+                    break;
+                  case "generation-vi":
+                    numGen = 6;
+                    nombreGen = "Kalos";
+                    break;
+                  case "generation-vii":
+                    numGen = 7;
+                    nombreGen = "Alola";
+                    break;
+                  case "generation-viii":
+                    numGen = 8;
+                    nombreGen = "Galar";
+                    break;
+                  case "generation-ix":
+                    numGen = 9;
+                    nombreGen = "Paldea";
+                    break;
+                  default:
+                    numGen =
+                        1; // Valor predeterminado si no se encuentra una coincidencia
+                }
+                print('numGen: $numGen'); // Imprimir el valor de numGen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListagenPage(numGen),
+                  ),
+                );
+              },
               child: Text(generations[index].toUpperCase()),
             ),
           );
