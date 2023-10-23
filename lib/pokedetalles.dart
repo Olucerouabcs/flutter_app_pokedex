@@ -45,7 +45,6 @@ class PokedetallesPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Verificar si details.spriteUrl es vacío o nulo
                     details.spriteUrl.isEmpty
                         ? Text('No hay sprite disponible')
                         : Image.network(details.spriteUrl, height: 200),
@@ -133,20 +132,19 @@ class PokemonDetails {
 }
 
 Future<PokemonDetails> fetchPokemonDetails(int pokedexNumber) async {
-  // Haz una solicitud a la API de PokeAPI para obtener detalles del Pokémon
   final response = await http
       .get(Uri.parse('https://pokeapi.co/api/v2/pokemon/$pokedexNumber/'));
   if (response.statusCode == 200) {
     final data = json.decode(response.body);
-    // Extrae los datos necesarios y crea un objeto PokemonDetails
+
     final name = data['name'];
     final types = (data['types'] as List)
         .map((type) => type['type']['name'].toString())
         .toList();
-// Verificar si 'sprites' contiene una URL válida
+
     final spriteUrl = data['sprites']['front_default'] != null
         ? data['sprites']['front_default'].toString()
-        : ''; // Puedes asignar una URL por defecto o un valor vacío en caso de no existir
+        : '';
     final height = data['height'] / 10.0;
     final weight = data['weight'] / 10.0;
     final abilities = (data['abilities'] as List)
@@ -176,8 +174,6 @@ Future<PokemonDetails> fetchPokemonDetails(int pokedexNumber) async {
 
 void main() {
   runApp(MaterialApp(
-    home: PokedetallesPage(
-        pokedexNumber:
-            1), // Cambia el número de Pokedex según el Pokémon que desees mostrar
+    home: PokedetallesPage(pokedexNumber: 1),
   ));
 }

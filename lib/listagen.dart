@@ -108,17 +108,15 @@ Future<PokemonDetails> fetchPokemonDetails(int pokedexNumber) async {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
 
-      // Verificar si 'types' y 'sprites' son nulos o no contienen datos válidos
       final types = (data['types'] as List<dynamic>?)?.map((typeData) {
             final typeName = typeData['type']['name'];
             return typeName != null ? typeName.toString() : '';
           })?.toList() ??
           [];
 
-      // Verificar si 'sprites' contiene una URL válida
       final spriteUrl = data['sprites']['front_default'] != null
           ? data['sprites']['front_default'].toString()
-          : ''; // Puedes asignar una URL por defecto o un valor vacío en caso de no existir
+          : '';
 
       return PokemonDetails(types, spriteUrl);
     } else {
@@ -179,14 +177,11 @@ class PokemonCard extends StatelessWidget {
               Row(
                 children: details.types.map((type) {
                   return Container(
-                    margin:
-                        EdgeInsets.only(right: 4.0), // Espacio entre los óvalos
+                    margin: EdgeInsets.only(right: 4.0),
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     decoration: BoxDecoration(
-                      color: typeColors[type.toLowerCase()] ??
-                          Colors.grey, // Obtén el color del mapa
-                      borderRadius:
-                          BorderRadius.circular(20.0), // Hacer un óvalo
+                      color: typeColors[type.toLowerCase()] ?? Colors.grey,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Text(
                       type,

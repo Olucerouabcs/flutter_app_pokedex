@@ -74,11 +74,9 @@ class _PokemonGenerationsPageState extends State<PokemonGenerationsPage> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.red[300],
-                minimumSize:
-                    Size(200, 60), // Establece el tamaño mínimo del botón
-                padding: EdgeInsets.all(20), // Establece el relleno del botón
-                textStyle:
-                    TextStyle(fontSize: 20), // Establece el tamaño del texto
+                minimumSize: Size(200, 60),
+                padding: EdgeInsets.all(20),
+                textStyle: TextStyle(fontSize: 20),
               ),
               onPressed: () {
                 int numGen = 1;
@@ -121,10 +119,9 @@ class _PokemonGenerationsPageState extends State<PokemonGenerationsPage> {
                     nombreGen = "Paldea";
                     break;
                   default:
-                    numGen =
-                        1; // Valor predeterminado si no se encuentra una coincidencia
+                    numGen = 1;
                 }
-                print('numGen: $numGen'); // Imprimir el valor de numGen
+                print('numGen: $numGen');
                 Navigator.push(
                   context,
                   MaterialPageRoute(

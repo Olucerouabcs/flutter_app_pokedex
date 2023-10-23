@@ -10,8 +10,7 @@ class ListaPoke extends StatefulWidget {
 
 class _ListaPokeState extends State<ListaPoke> {
   String searchText = '';
-  List<Map<String, dynamic>> searchResults =
-      []; // Lista de pares de nombre y número de Pokédex
+  List<Map<String, dynamic>> searchResults = [];
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,7 @@ class _ListaPokeState extends State<ListaPoke> {
                 final pokemon = searchResults[index];
                 return GestureDetector(
                   onTap: () {
-                    final pokedexNumber = pokemon[
-                        'pokedexNumber']; // Obtener el número de la Pokédex
+                    final pokedexNumber = pokemon['pokedexNumber'];
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -53,8 +51,7 @@ class _ListaPokeState extends State<ListaPoke> {
                     );
                   },
                   child: ListTile(
-                    title:
-                        Text(pokemon['name']), // Mostrar el nombre del Pokémon
+                    title: Text(pokemon['name']),
                   ),
                 );
               },
@@ -66,8 +63,8 @@ class _ListaPokeState extends State<ListaPoke> {
   }
 
   Future<void> buscarPokemonesPorNombre(String query) async {
-    final response = await http.get(Uri.parse(
-        'https://pokeapi.co/api/v2/pokemon?limit=1017')); // Obtener datos de los primeros 1000 Pokémon
+    final response = await http
+        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=1017'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -78,8 +75,7 @@ class _ListaPokeState extends State<ListaPoke> {
       for (var result in results) {
         final pokemonName = result['name'];
         if (pokemonName.toLowerCase().contains(query.toLowerCase())) {
-          final pokedexNumber =
-              results.indexOf(result) + 1; // Calcular el número de Pokédex
+          final pokedexNumber = results.indexOf(result) + 1;
           resultados.add({
             'name': pokemonName,
             'pokedexNumber': pokedexNumber,
